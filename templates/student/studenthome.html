@@ -128,10 +128,18 @@
 										<div class="user-post">
 											<div class="friend-info">
 												<figure>
-													{% if po.user.student.profile_img %}
-														<img src=" {{ po.user.student.profile_img.url }} " style="width:45px; height:40px; ">
+													{% if po.user.is_union %}
+														{% if po.user.union.logo %}
+															<img src=" {{ po.user.union.logo.url }} " style="width:45px; height:40px; ">
+														{% else %}
+															<img src="{% static 'user/images/male.png' %}" style="width:45px; height:40px; ">
+														{% endif %}
 													{% else %}
-														<img src="{% static 'user/images/male.png' %}" style="width:45px; height:40px; ">
+														{% if po.user.student.profile_img %}
+															<img src=" {{ po.user.student.profile_img.url }} " style="width:45px; height:40px; ">
+														{% else %}
+															<img src="{% static 'user/images/male.png' %}" style="width:45px; height:40px; ">
+														{% endif %}
 													{% endif %}
 												</figure>
 												<div class="friend-name">

@@ -12,8 +12,8 @@
             <div class="chat-box show col-xl-8 bg-light">
                 <div class="chat-head col-md-4 col-xl-5 col-9">
                     <figure>
-                        {% if po.user.student.profile_img %}
-                            <img src=" {{ po.user.student.profile_img.url }} " style="width:45px; height:40px; ">
+                        {% if user2.student.profile_img %}
+                            <img src=" {{ user2.student.profile_img.url }} " style="width:45px; height:40px; ">
                         {% else %}
                             <img src="{% static 'user/images/male.png' %}" style="width:45px; height:40px; ">
                         {% endif %}
@@ -25,7 +25,13 @@
                         {% for n in messages %}
                         {% if n.user1 == request.user %}
                         <div class="me mb-1">
-                            <div class="chat-thumb"><img src="{{ user.student.profile_img.url }}" alt=""></div>
+                            <div class="chat-thumb">
+                                {% if user.student.profile_img %}
+                                    <img src=" {{ user.student.profile_img.url }} ">
+                                {% else %}
+                                    <img src="{% static 'user/images/male.png' %}">
+                                {% endif %}
+                            </div>
                             <div class="notification-event">
                                 {% if n.message_type == 'image' %}
                                 <span class="chat-message-item"> <img src=" {{ n.vid_img.url }}" alt="" style="height:300px"></span>
@@ -57,12 +63,18 @@
                         </div>
                         {% else %}
                         <div class="you mb-1">
-                            <div class="chat-thumb"><img src="{{ user2.student.profile_img.url }}" alt=""></div>
+                            <div class="chat-thumb">
+                                {% if user2.student.profile_img %}
+                                    <img src=" {{ user2.student.profile_img.url }} ">
+                                {% else %}
+                                    <img src="{% static 'user/images/male.png' %}" >
+                                {% endif %}
+                            </div>
                             <div class="notification-event">
                                 {% if n.message_type == 'image' %}
-                                <span class="chat-message-item"> <img src=" {{ n.message }}" alt="" style="height:300px"></span>
+                                <span class="chat-message-item bg-warning"> <img src=" {{ n.message }}" alt="" style="height:300px"></span>
                                 {% else %}
-                                <span class="chat-message-item">{{ n.message }}</span>
+                                <span class="chat-message-item bg-warning">{{ n.message }}</span>
                                 {% endif %}
                                 <span class="notification-date"><time class="entry-date updated">{{ n.timestamp }}</time></span>
                             </div>
@@ -309,7 +321,13 @@
 
         if (user == '{{request.user}}') {
             var msg1 = `<div class="me mb-1">
-                            <div class="chat-thumb"><img src="{{ user.student.profile_img.url }}" alt=""></div>
+                            <div class="chat-thumb">
+                                {% if user.student.profile_img %}
+                                    <img src=" {{ user.student.profile_img.url }} ">
+                                {% else %}
+                                    <img src="{% static 'user/images/male.png' %}">
+                                {% endif %}
+                            </div>
                             <div class="notification-event">
                                 <span class="chat-message-item">${msg}</span>
                                 <span class="notification-date"><time class="entry-date updated">Just now</time></span>
@@ -317,7 +335,13 @@
                         </div>`
         } else {
             var msg1 = `<div class="me mb-1">
-                            <div class="chat-thumb"><img src="{{ user2.student.profile_img.url }}" alt=""></div>
+                            <div class="chat-thumb">
+                                {% if user2.student.profile_img %}
+                                    <img src=" {{ user2.student.profile_img.url }} ">
+                                {% else %}
+                                    <img src="{% static 'user/images/male.png' %}">
+                                {% endif %}
+                            </div>
                             <div class="notification-event">
                                 <span class="chat-message-item bg-warning">${msg}</span>
                                 <span class="notification-date"><time class="entry-date updated">Just now</time></span>
