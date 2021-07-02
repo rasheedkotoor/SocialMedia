@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Students</title>
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+
+    <link rel="stylesheet" href="{% static 'user/css/main.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/weather-icons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/toast-notification.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/page-tour.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/responsive.css' %}">
+</head>
+<body>
+	<div class="wavy-wraper">
+		<div class="wavy">
+		  <span style="--i:1;">L</span>
+		  <span style="--i:2;">o</span>
+		  <span style="--i:3;">a</span>
+		  <span style="--i:4;">d</span>
+		  <span style="--i:5;">i</span>
+		  <span style="--i:6;">n</span>
+		  <span style="--i:7;">g</span>
+		  <span style="--i:8;">.</span>
+		  <span style="--i:9;">.</span>
+		</div>
+	</div>
+	<div class="theme-layout">
+
+		<div class="postoverlay"></div>
+		<!--_________________________________________________________________________________________-->
+		<!-- small div headers start -->
+		<div class="responsive-header">
+			<div class="mh-head first Sticky">
+				<span class="mh-btns-left">
+					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+				</span>
+				<span class="mh-text">
+					<a href="home.html" title=""><img src="{% static 'user/images/logo2.png' %}" alt=""></a>
+				</span>
+			</div>
+			<div class="mh-head second">
+				<form class="mh-form">
+					<input placeholder="search" />
+					<a href="#/" class="fa fa-search"></a>
+				</form>
+			</div>
+			<nav id="menu" class="res-menu">
+				<ul>
+					{% if user.is_authenticated %}
+					<li><span><a href="home.html" title="">Home</a></span></li>
+					<li><span><a href="index-2.html" title="">Home</a></span></li>
+					{% else %}
+					<li><span><a href="{% url 'login' %}" title="">Login</a></span></li>
+					<li><span><a href="{% url 'student_register' %}" title="">Sign Up</a></span></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div><!-- responsive header -->
+		<!-- sm div headers end -->
+		<!--__________________________________________________________________________________________-->
+
+		<!-- lg div headers start -->
+		<div class="topbar stick">
+			<div class="logo">
+				<a title="" href="home.html"><img src="{% static 'user/images/logo.png' %}" alt=""></a>
+			</div>
+			<div class="top-area">
+				<!--				<div class="main-menu">-->
+				<!--					<span>-->
+				<!--						<i class="fa fa-brailjle"></i>-->
+				<!--					</span>-->
+				<!--				</div>-->
+				{% if user.is_authenticated %}
+				<div class="top-search">
+					<form method="post" class="">
+						<input type="text" placeholder="Search People, Unions etc">
+						<button data-ripple><i class="ti-search"></i></button>
+					</form>
+				</div>
+				<div class="page-name">
+					<span>{{ user.username }}</span>
+				</div>
+				<ul class="setting-area">
+					<li><a href="home.html"  title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
+					<li>
+						<a href="#" title="Friend Requests" data-ripple="">
+							<i class="fa fa-user"></i><em class="bg-red">5</em>
+						</a>
+						<div class="dropdowns">
+							<!-- <span>5 New Requests <a href="#" title="">View all Requests</a></span>
+							<ul class="drops-menu">
+								<li>
+									<div>
+										<figure>
+											<img src="images/resources/thumb-2.jpg" alt="">
+										</figure>
+										<div class="mesg-meta">
+											<h6><a href="#" title="">Loren</a></h6>
+											<span><b>Amy</b> is mutule friend</span>
+											<i>yesterday</i>
+										</div>
+										<div class="add-del-friends">
+											<a href="#" title=""><i class="fa fa-heart"></i></a>
+											<a href="#" title=""><i class="fa fa-trash"></i></a>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<a href="friend-requests.html" title="" class="more-mesg">View All</a> -->
+						</div>
+					</li>
+					<li>
+						<a href="#" title="Notification" data-ripple="">
+							<i class="fa fa-bell"></i><em class="bg-purple">7</em>
+						</a>
+						<div class="dropdowns">
+							<!-- <span>4 New Notifications <a href="#" title="">Mark all as read</a></span>
+							<ul class="drops-menu">
+								<li>
+									<a href="notifications.html" title="">
+										<figure>
+											<img src="images/resources/thumb-1.jpg" alt="">
+											<span class="status f-online"></span>
+										</figure>
+										<div class="mesg-meta">
+											<h6>sarah Loren</h6>
+											<span>commented on your new profile status</span>
+											<i>2 min ago</i>
+										</div>
+									</a>
+								</li>
+							</ul>
+							<a href="notifications.html" title="" class="more-mesg">View All</a> -->
+						</div>
+					</li>
+					<li>
+						<a href="#" title="Messages" data-ripple=""><i class="fa fa-commenting"></i><em class="bg-blue">9</em></a>
+						<div class="dropdowns">
+							<!-- <span>5 New Messages <a href="#" title="">Mark all as read</a></span>
+							<ul class="drops-menu">
+								<li>
+									<a class="show-mesg" href="#" title="">
+										<figure>
+											<img src="images/resources/thumb-1.jpg" alt="">
+											<span class="status f-online"></span>
+										</figure>
+										<div class="mesg-meta">
+											<h6>sarah Loren</h6>
+											<span><i class="ti-check"></i> Hi, how r u dear ...?</span>
+											<i>2 min ago</i>
+										</div>
+									</a>
+								</li>
+							</ul>
+							<a href="chat-messenger.html" title="" class="more-mesg">View All</a> -->
+						</div>
+					</li>
+				</ul>
+				<div class="user-img">
+					<h5><a href="{% url 'logout' %}" title=""><i class="ti-power-off"></i>log out</a></h5>
+					<img src="{% static 'user/images/resources/admin.jpg' %}" alt="">
+					<span class="status f-online"></span>
+					<div class="user-setting">
+						<!-- <span class="seting-title">Chat setting <a href="#" title="">see all</a></span>
+						<ul class="chat-setting">
+							<li><a href="#" title=""><span class="status f-online"></span>online</a></li>
+							<li><a href="#" title=""><span class="status f-away"></span>away</a></li>
+							<li><a href="#" title=""><span class="status f-off"></span>offline</a></li>
+						</ul> -->
+<!--						<span class="seting-title">User setting <a href="#" title="">see all</a></span>-->
+						<ul class="log-out">
+							<li><a href="about.html" title=""><i class="ti-user"></i> view profile</a></li>
+							<li><a href="setting.html" title=""><i class="ti-pencil-alt"></i>edit profile</a></li>
+
+						</ul>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</div><!-- topbar --> <!-- lg div headers end -->
+
+		{% if user.is_authenticated %}
+		<!-- right sidebar user chat start-->
+		<div class="fixed-sidebar right">
+			<div class="chat-friendz">
+				<ul class="chat-users">
+					<li>
+						<div class="author-thmb">
+							<img src="{% static 'user/images/resources/side-friend1.jpg' %}" alt="">
+							<span class="status f-online"></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div><!-- right sidebar user chat end-->
+
+		<div class="fixed-sidebar left">
+			<div class="menu-left">
+				<ul class="left-menu">
+					<li>
+						<a class="menu-small" href="#" title="">
+							<i class="ti-menu"></i>
+						</a>
+					</li>
+
+					<li>
+						<a href="posts.html" title="Newsfeed Page" data-toggle="tooltip" data-placement="right">
+							<i class="ti-magnet"></i>
+						</a>
+					</li>
+					<li>
+						<a href="unions.html" title="Forum" data-toggle="tooltip" data-placement="right">
+							<i class="fa fa-forumbee"></i>
+						</a>
+					</li>
+					<li>
+						<a href="timeline-friends.html" title="Friends" data-toggle="tooltip" data-placement="right">
+							<i class="ti-user"></i>
+						</a>
+					</li>
+					<li>
+						<a href="fav-page.html" title="Favourit page" data-toggle="tooltip" data-placement="right">
+							<i class="fa fa-star-o"></i>
+						</a>
+					</li>
+					<li>
+						<a href="notifications.html" title="Notification" data-toggle="tooltip" data-placement="right">
+							<i class="fa fa-bell-o"></i>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+			<div class="left-menu-full">
+				<ul class="menu-slide">
+					<li><a class="closd-f-menu" href="#" title=""><i class="ti-close"></i> close Menu</a></li>
+					<li class="menu-item-has-children"><a class="" href="#" title=""><i class="fa fa-home"></i> Home </a>
+					</li>
+					<li class="menu-item-has-children"><a class="" href="#" title=""><i class="fa fa-film"></i> Posts </a>
+					</li>
+					<li class="menu-item-has-children"><a class="" href="#" title=""><i class="fa fa-female"></i> Friends </a>
+					</li>
+					<li class="menu-item-has-children"><a class="" href="#" title=""><i class="fa fa-graduation-cap"></i> Unions </a>
+					</li>
+					<li class="menu-item-has-children"><a class="" href="#" title=""><i class="fa fa-repeat"></i>Timeline</a>
+					</li>
+				</ul>
+			</div>
+		</div><!-- left sidebar menu -->
+		{% endif %}
+
+
+
+
+		{% block content %}
+		{% endblock %}
+
+
+
+
+		<div class="bottombar">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<span class="copyright">© Students Circle 2021. All rights reserved.</span>
+						<i><img src="{% static 'user/images/credit-cards.png' %}" alt=""></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'user/js/main.min.js' %}"></script>
+	<script src="{% static 'user/js/jquery-stories.js' %}"></script>
+	<script src="{% static 'user/js/toast-notificatons.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script><!-- For timeline slide show -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script><!-- for location picker map -->
+	<script src="{% static 'user/js/locationpicker.jquery.js' %}"></script><!-- for loaction picker map -->
+	<script src="{% static 'user/js/map-init.js' %}"></script><!-- map initilasition -->
+	<!-- <script src="js/page-tourintro.js"></script> -->
+	<script src="{% static 'user/js/page-tour-init.js' %}"></script>
+	<script src="{% static 'user/js/script.js' %}"></script>
+    <!-- location and welcome, info and support flash head start -->
+    <script>
+        // jQuery(document).ready(function($) {
+
+        // 	$('#us3').locationpicker({
+        // 	  location: {
+        // 	    latitude: -8.681013,
+        // 	    longitude: 115.23506410000005
+        // 	  },
+        // 	  radius: 0,
+        // 	  inputBinding: {
+        // 	    latitudeInput: $('#us3-lat'),
+        // 	    longitudeInput: $('#us3-lon'),
+        // 	    radiusInput: $('#us3-radius'),
+        // 	    locationNameInput: $('#us3-address')
+        // 	  },
+        // 	  enableAutocomplete: true,
+        // 	  onchanged: function (currentLocation, radius, isMarkerDropped) {
+        // 	    // Uncomment line below to show alert on each Location Changed event
+        // 	    //alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
+        // 	  }
+        // 	});
+
+        // if ($.isFunction($.fn.toast)) {
+        // 	$.toast({
+        // 		heading: 'Welcome To Pitnik',
+        // 		text: '',
+        // 		showHideTransition: 'slide',
+        // 		icon: 'success',
+        // 		loaderBg: '#fa6342',
+        // 		position: 'bottom-right',
+        // 		hideAfter: 3000,
+        // 	});
+
+        // 	$.toast({
+        // 		heading: 'Information',
+        // 		text: 'Now you can full demo of pitnik and hope you like',
+        // 		showHideTransition: 'slide',
+        // 		icon: 'info',
+        // 		hideAfter: 5000,
+        // 		loaderBg: '#fa6342',
+        // 		position: 'bottom-right',
+        // 	});
+        // 	$.toast({
+        // 		heading: 'Support & Help',
+        // 		text: 'Report any <a href="#">issues</a> by email',
+        // 		showHideTransition: 'fade',
+        // 		icon: 'error',
+        // 		hideAfter: 7000,
+        // 		loaderBg: '#fa6342',
+        // 		position: 'bottom-right',
+        // 	});
+        // }
+
+        // });
+    </script>
+    <!-- location and welcome, info and support flash head end -->
+
+</body>
+
+</html>

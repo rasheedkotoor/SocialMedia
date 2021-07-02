@@ -1,0 +1,188 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+	<div class="gap2 gray-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row merged20" id="page-contents">
+						{% include 'student/profile_head.html' %}
+						<div class="col-lg-3">
+							<aside class="sidebar static left">
+								<div class="widget">
+<!--									<div class="weather-widget low-opacity bluesh">-->
+<!--										<div class="bg-image" style="background-image: url(images/resources/weather.jpg)"></div>-->
+<!--										<span class="refresh-content"><i class="fa fa-refresh"></i></span>-->
+<!--										<div class="weather-week">-->
+<!--											<div class="icon sun-shower">-->
+<!--											  <div class="cloud"></div>-->
+<!--											  <div class="sun">-->
+<!--												<div class="rays"></div>-->
+<!--											  </div>-->
+<!--											  <div class="rain"></div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="weather-infos">-->
+<!--											<span class="weather-tem">25</span>-->
+<!--											<h3>Cloudy Skyes<i>Sicklervilte, New Jersey</i></h3>-->
+<!--											<div class="weather-date skyblue-bg">-->
+<!--												<span>MAY<strong>21</strong></span>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										<div class="monthly-weather">-->
+<!--											<ul>-->
+<!--												<li>-->
+<!--													<span>Sun</span>-->
+<!--													<a href="#" title=""><i class="wi wi-day-sunny"></i></a>-->
+<!--													<em>40°</em>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<span>Mon</span>-->
+<!--													<a href="#" title=""><i class="wi wi-day-cloudy"></i></a>-->
+<!--													<em>10°</em>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<span>Tue</span>-->
+<!--													<a href="#" title=""><i class="wi wi-day-hail"></i></a>-->
+<!--													<em>20°</em>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<span>Wed</span>-->
+<!--													<a href="#" title=""><i class="wi wi-day-lightning"></i></a>-->
+<!--													<em>34°</em>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<span>Thu</span>-->
+<!--													<a href="#" title=""><i class="wi wi-day-showers"></i></a>-->
+<!--													<em>22°</em>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<span>Fri</span>-->
+<!--													<a href="#" title=""><i class="wi wi-day-windy"></i></a>-->
+<!--													<em>26°</em>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<span>Sat</span>-->
+<!--													<a href="#" title=""><i class="wi wi-day-sunny-overcast"></i></a>-->
+<!--													<em>30°</em>-->
+<!--												</li>-->
+<!--											</ul>-->
+<!--										</div>-->
+
+<!--									</div>&lt;!&ndash; Weather Widget &ndash;&gt;-->
+								</div><!-- wether feed-->
+							</aside>
+						</div><!-- sidebar -->
+<!--						=======================================================================================-->
+						<div class="col-lg-6">
+							{% for po in my_posts %}
+							<div class="central-meta item" style="">
+								<div class="user-post">
+									<div class="friend-info">
+										<figure>
+											{% if user.student.profile_img %}
+												<img src=" {{ user.student.profile_img.url }} " style="width:45px">
+											{% else %}
+												<img src="{% static 'user/images/male.png' %}" style="width:45px">
+											{% endif %}
+										</figure>
+										<div class="friend-name">
+											<ins><a href="" title="">{{ po.user }}</a></ins>
+											<span>published: {{ po.created }}</span>
+										</div>
+										<div class="post-meta">
+											{% if po.image_url %}
+											<figure>
+												{% if po.filetype == 'image' %}
+													<img src="{{ po.image_url }}" alt="img" style="">
+												{% elif po.filetype == 'video' %}
+													<video width="500" height="400" controls>
+														<source src="{{ po.image_url }}" type="video/mp4">
+														<source src="{{ po.image_url }}" type="video/ogg">
+														Your browser does not support the video tag.
+													</video>
+												{% else %}
+													<embed src="{{ po.image_url }}" width="500px" height="400px" />
+												{% endif %}
+											</figure>
+											{% endif %}
+											<div class="description">
+												<p>{{ po.text }}</p>
+											</div>
+											<div class="we-video-info">
+												<ul>
+													<li>
+														{% if po.liked %}
+														<div class=" likes heart" style="color:red" title="Like/Dislike" data-post_id="{{po.id}}">❤ <span>{{ po.like_set.count }}</span></div>
+														{% else %}
+														<div class="like_button likes heart" style="color:#ffb3b3" title="Like/Dislike" data-post_id="{{po.id}}">❤ <span>{{ po.like_set.count }}</span></div>
+														{% endif %}
+													</li>
+													<li>
+														<span class="comment" title="Comments">
+															<i class="fa fa-commenting"></i>
+															<ins>{{ po.comment_set.count }}</ins>
+														</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="coment-area" style="">
+											<ul class="we-comet">
+												{% for comment in po.comment_set.all %}
+												<li>
+													<div class="comet-avatar">
+														<img src="{% static 'user/images/resources/nearly3.jpg' %}" alt="">
+													</div>
+													<div class="we-comment">
+														<h5><a href="" title="">{{ comment.user }}</a></h5>
+														<p>{{ comment.comment }}</p>
+														<div class="inline-itms">
+															<span>{{ comment.time }}</span>
+															<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															<a href="#" title=""><i class="fa fa-heart"></i><span>20</span></a>
+														</div>
+													</div>
+												</li>
+												{% endfor %}
+
+												<li class="post-comment">
+													<div class="comet-avatar">
+														<img src="{% static 'user/images/resources/nearly1.jpg' %}" alt="">
+													</div>
+													<div class="post-comt-box">
+														<form id="comment_form">
+															<textarea id="cmnt-{{po.id}}" placeholder="Post your comment"></textarea>
+															<a class="cmnt_button main-btn2 p-2 m-2 mb-2" type="submit" data-post_id="{{po.id}}">send</a>
+														</form>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						</div><!-- centerl meta -->
+<!--						=======================================================================================-->
+						<div class="col-lg-3">
+							<aside class="sidebar static right">
+								<div class="widget">
+									<div class="banner medium-opacity purple">
+										<div class="banermeta">
+											<p>The more you create, the more you have.</p>
+										</div>
+									</div>
+								</div>
+							</aside>
+						</div><!-- sidebar -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

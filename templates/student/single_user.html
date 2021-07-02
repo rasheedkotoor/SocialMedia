@@ -1,0 +1,147 @@
+{% extends 'base2.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<section>
+	<div class="gap2 gray-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row merged20" id="page-contents">
+						<div class="user-profile">
+							<figure style="height:200px; width:1110;">
+								{% if single_user.student.background_img %}
+								<img alt="author"  src=" {{ single_user.student.background_img.url }} "  >
+								{% else %}
+								<img alt="cropped" src="{% static 'user/images/resources/profile-image.jpg' %}" >
+								{% endif %}
+							</figure>
+
+							<div class="profile-section">
+								<div class="row">
+									<div class="col-lg-2 col-md-3">
+										<div class="profile-author">
+											<div class="profile-author-thumb">
+												{% if single_user.student.profile_img %}
+												<img  alt="author"  src=" {{ single_user.student.profile_img.url }} ">
+												{% else %}
+												<img alt="cropped" src="{% static 'user/images/male.png' %}">
+												{% endif %}
+											</div>
+											<div class="author-content">
+												<a class="h4 author-name" href="about.html">{{ single_user.username|capfirst }}</a>
+												{% if single_user.is_verified %}
+												<div class="country">{{ single_user.student.union|title }}</div>
+												{% else %}
+												<div class="country text-danger">Not verified</div>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-10 col-md-9">
+										<ul class="profile-menu">
+											<li>
+												<a class="">About</a>
+											</li>
+										</ul>
+										<ol class="folw-detail">
+											<li><span>Posts</span><ins>{{ single_user.post_set.count }}</ins></li>
+											<li><span>Followers</span><ins>{{ single_user.friends.count }}</ins></li>
+										</ol>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-lg-4 col-md-4">
+							<aside class="sidebar">
+								<div class="central-meta stick-widget" style="">
+									<span class="create-post" id="edit_personal_info">Personal Info
+									</span>
+									<div class="personal-head">
+										<span class="f-title"><i class="fa fa-pencil"></i> Full Name:</span>
+										<p>{{ single_user.first_name }} {{ single_user.last_name }}</p>
+										{% if single_user.student.bio %}
+											<span class="f-title"><i class="fa fa-user"></i> About Me:</span>
+											<p>{{ single_user.student.bio }}</p>
+										{% endif %}
+										<span class="f-title"><i class="fa fa-birthday-cake"></i> Birthday:</span>
+										<p>{{ single_user.student.birth_date|date:"M d" }}</p>
+
+										<span class="f-title"><i class="fa fa-phone"></i> Phone Number:</span>
+										<p>{{ single_user.phone_number }}</p>
+
+										<span class="f-title"><i class="fa fa-envelope"></i> Email:</span>
+										<p>{{ single_user.email }}</p>
+
+										<span class="f-title"><i class="fa fa-globe"></i> Location:</span>
+										<p>{{ single_user.student.location }}</p>
+									</div>
+								</div>
+								<div class="central-meta stick-widget" style="">
+									<span class="create-post">General Info</span>
+									<div class="personal-head">
+										<span class="f-title"><i class="fa fa-university"></i> Collage:</span>
+										<p>{{ single_user.student.union.college }}</p>
+										<span class="f-title"><i class="fa fa-list-ol"></i> Admission Number:</span>
+										<p>{{ single_user.student.admission_num }}</p>
+										<span class="f-title"><i class="fa fa-users"></i> Students Union:</span>
+										<p>{{ single_user.student.union }}</p>
+										<span class="f-title"><i class="fa fa-graduation-cap"></i> Batch Name and Number:</span>
+										<p>{{ single_user.student.batch }}: {{ single_user.student.batch_num }}</p>
+										<span class="f-title"><i class="fa fa-handshake-o"></i> Joined:</span>
+										<p>{{ single_user.student.timestamp }}</p>
+									</div>
+								</div>
+							</aside>
+						</div>
+						<div class="col-lg-8 col-md-8">
+							<div class="central-meta">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="gen-metabox">
+											<span class="f-title"><i class="fa fa-puzzle-piece"></i> Hobbies:</span>
+											<p>{{ single_user.student.hobbies }}</p>
+										</div>
+										<div class="gen-metabox">
+											<span class="f-title"><i class="fa fa-puzzle-piece"></i> Interests:</span>
+											<p> {% for item in single_user.student.interests%} {{ item|title }}, {% endfor %} </p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="central-meta">
+								<span class="create-post">My Union </span>
+								<div class="row">
+									<div class="col-lg-4 col-md-4 col-sm-4">
+										<div class="fav-play">
+											<figure>
+												{% if single_user.student.union.user.union.logo.url %}
+													<img src=" {{ single_user.student.union.user.union.logo.url }} " style="width:50px">
+												{% else %}
+													<img src="{% static 'user/images/male.png' %}" style="width:45px">
+												{% endif %}
+											</figure>
+											<span class="tv-play-title">{{ single_user.student.union }}</span>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6">
+										<div class="fav-play">
+											<span class="tv-play-title">Name: {{single_user.student.union.user.first_name}}</span> <br>
+											<span class="tv-play-title">Email: {{single_user.student.union.user.email}}</span> <br>
+											<span class="tv-play-title">Bio: {{single_user.student.union.user.union.bio}}</span> <br>
+											<span class="tv-play-title">College: {{single_user.student.union.user.union.college_name}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

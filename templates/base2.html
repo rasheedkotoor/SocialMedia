@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Students</title>
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+
+    <link rel="stylesheet" href="{% static 'user/css/main.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/weather-icons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/toast-notification.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/page-tour.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/responsive.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
+
+</head>
+<body>
+	<div class="wavy-wraper">
+		<div class="wavy">
+		  <span style="--i:1;">L</span>
+		  <span style="--i:2;">o</span>
+		  <span style="--i:3;">a</span>
+		  <span style="--i:4;">d</span>
+		  <span style="--i:5;">i</span>
+		  <span style="--i:6;">n</span>
+		  <span style="--i:7;">g</span>
+		  <span style="--i:8;">.</span>
+		  <span style="--i:9;">.</span>
+		</div>
+	</div>
+
+	<div class="theme-layout">
+
+		<div class="postoverlay"></div>
+		<!--_________________________________________________________________________________________-->
+		<!-- small div headers start -->
+		<div class="responsive-header">
+			<div class="mh-head first Sticky">
+				<span class="mh-btns-left">
+					<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
+				</span>
+				<span class="mh-text">
+					<a href="/" title=""><img src="{% static 'user/images/logo2.png' %}" alt=""></a>
+				</span>
+			</div>
+			<div class="mh-head second">
+				<form class="mh-form">
+					<input placeholder="search" />
+					<a href="/" class="fa fa-search"></a>
+				</form>
+			</div>
+			<nav id="menu" class="res-menu">
+				<ul>
+					{% if user.is_authenticated %}
+					<li><span><a href="{% url 'student:home' %}" title="">Home</a></span></li>
+					<li><span><a href="{% url 'student:profile' %}" title="">Profile</a></span></li>
+					<li><span><a href="{% url 'student:timeline' %}" title="">My Posts</a></span></li>
+					{% if user.is_verified %}
+					<li><span><a href="{% url 'student:friends' %}" title="">Friends</a></span></li>
+					<li><span><a href="{% url 'student:unions' %}" title="">Unions</a></span></li>
+					{% endif %}
+					{% else %}
+					<li><span><a href="{% url 'accounts:login' %}" title="">Login</a></span></li>
+					<li><span><a href="{% url 'accounts:student_register' %}" title="">Register</a></span></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div><!-- responsive header -->
+		<!-- sm div headers end -->
+		<!--__________________________________________________________________________________________-->
+
+		<!-- lg div headers start -->
+		<div class="topbar stick"style="possition:fixed; z-index:90000000">
+			<div class="logo">
+				<a title="" href="{% url 'student:home' %}">
+					<h3 class="mt-2">StudentsCircle</h3>
+				</a>
+			</div>
+			<div class="top-area">
+				{% if user.is_authenticated %}
+				<div class="top-search">
+<!--					<form method="post" class="">-->
+<!--						<input type="text" placeholder="Search People, Unions etc">-->
+<!--						<button data-ripple><i class="ti-search"></i></button>-->
+<!--					</form>-->
+				</div>
+				<div class="page-name">
+					<span>{{ user.username }}</span>
+				</div>
+				<ul class="setting-area">
+				</ul>
+				<div class="user-img">
+					<h5><a href="{% url 'accounts:logout' %}" title=""><i class="ti-power-off"></i>log out</a></h5>
+					{% if user.student.profile_img %}
+					<img src=" {{ user.student.profile_img.url }} " style="width:60px">
+					{% else %}
+					<img src="{% static 'user/images/male.png' %}" style="width:60px">
+					{% endif %}
+					<span class="status f-online"></span>
+					<div class="user-setting">	</div>
+				</div>
+				{% else %}
+				<div class="top-search">
+				</div>
+				<div class="page-name">
+					<a href="{% url 'accounts:login' %}" class="btn mt-3" style="display: block; color: #fff"><span>LOGIN</span></a>
+				</div>
+				<div class="page-name">
+					<a href="{% url 'accounts:student_register' %}" class="btn mt-3" style="display: block; color: #fff"><span>Register</span></a>
+				</div>
+				{% endif %}
+			</div>
+		</div><!-- topbar --> <!-- lg div headers end -->
+
+		{% if user.is_authenticated %}
+		<!-- right sidebar user chat start-->
+		<div class="fixed-sidebar right">
+			<div class="chat-friendz">	</div>
+		</div><!-- right sidebar user chat end-->
+
+		<div class="fixed-sidebar left">
+			<div class="menu-left">
+				<ul class="left-menu">
+					<li>
+						<a class="menu-small" href="#" title="">
+							<i class="ti-menu"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'student:home' %}" title="Home" data-toggle="tooltip" data-placement="right">
+							<i class="ti-home"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'student:profile' %}" title="Profile" data-toggle="tooltip" data-placement="right">
+							<i class="ti-user"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'student:timeline' %}" title="My Posts" data-toggle="tooltip" data-placement="right">
+							<i class="ti-files"></i>
+						</a>
+					</li>
+					{% if user.is_verified %}
+					<li>
+						<a href="{% url 'student:friends' %}" title="Friends" data-toggle="tooltip" data-placement="right">
+							<i class="ti-link"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'student:unions' %}" title="Unions" data-toggle="tooltip" data-placement="right">
+							<i class="ti-view-grid"></i>
+						</a>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+			<div class="left-menu-full">
+				<ul class="menu-slide">
+					<li><a class="closd-f-menu" href="" title=""><i class="ti-close"></i> close Menu</a></li>
+					<li class="menu-item-has-children"><a class="" href="{% url 'student:home' %}" title=""><i class="ti-home"></i> Home </a>
+					</li>
+					<li class="menu-item-has-children"><a class="" href="{% url 'student:profile' %}" title=""><i class="ti-user"></i> Profile </a>
+					</li>
+					<li class="menu-item-has-children"><a class="" href="{% url 'student:timeline' %}" title=""><i class="ti-files"></i>My Posts </a>
+					</li>
+					{% if user.is_verified %}
+					<li class="menu-item-has-children"><a class="" href="{% url 'student:friends' %}" title=""><i class="ti-link"></i> Friends </a>
+					</li>
+					<li class="menu-item-has-children"><a class="" href="{% url 'student:unions' %}" title=""><i class="ti-view-grid"></i> Unions </a>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div><!-- left sidebar menu -->
+		{% endif %}
+
+
+
+
+		{% block content %}
+		{% endblock %}
+
+
+
+
+		<div class="bottombar">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<span class="copyright">© Students Circle 2021. All rights reserved.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'user/js/main.min.js' %}"></script>
+	<script src="{% static 'user/js/jquery-stories.js' %}"></script>
+	<script src="{% static 'user/js/toast-notificatons.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script><!-- For timeline slide show -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script><!-- for location picker map -->
+	<script src="{% static 'user/js/locationpicker.jquery.js' %}"></script><!-- for loaction picker map -->
+	<script src="{% static 'user/js/map-init.js' %}"></script><!-- map initilasition -->
+	<!-- <script src="js/page-tourintro.js"></script> -->
+	<script src="{% static 'user/js/page-tour-init.js' %}"></script>
+	<script src="{% static 'user/js/script.js' %}"></script>
+    <!-- location and welcome, info and support flash head start -->
+    <script>
+        // jQuery(document).ready(function($) {
+
+        // 	$('#us3').locationpicker({
+        // 	  location: {
+        // 	    latitude: -8.681013,
+        // 	    longitude: 115.23506410000005
+        // 	  },
+        // 	  radius: 0,
+        // 	  inputBinding: {
+        // 	    latitudeInput: $('#us3-lat'),
+        // 	    longitudeInput: $('#us3-lon'),
+        // 	    radiusInput: $('#us3-radius'),
+        // 	    locationNameInput: $('#us3-address')
+        // 	  },
+        // 	  enableAutocomplete: true,
+        // 	  onchanged: function (currentLocation, radius, isMarkerDropped) {
+        // 	    // Uncomment line below to show alert on each Location Changed event
+        // 	    //alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
+        // 	  }
+        // 	});
+
+        // if ($.isFunction($.fn.toast)) {
+        // 	$.toast({
+        // 		heading: 'Welcome To Pitnik',
+        // 		text: '',
+        // 		showHideTransition: 'slide',
+        // 		icon: 'success',
+        // 		loaderBg: '#fa6342',
+        // 		position: 'bottom-right',
+        // 		hideAfter: 3000,
+        // 	});
+
+        // 	$.toast({
+        // 		heading: 'Information',
+        // 		text: 'Now you can full demo of pitnik and hope you like',
+        // 		showHideTransition: 'slide',
+        // 		icon: 'info',
+        // 		hideAfter: 5000,
+        // 		loaderBg: '#fa6342',
+        // 		position: 'bottom-right',
+        // 	});
+        // 	$.toast({
+        // 		heading: 'Support & Help',
+        // 		text: 'Report any <a href="#">issues</a> by email',
+        // 		showHideTransition: 'fade',
+        // 		icon: 'error',
+        // 		hideAfter: 7000,
+        // 		loaderBg: '#fa6342',
+        // 		position: 'bottom-right',
+        // 	});
+        // }
+
+        // });
+    </script>
+    <!-- location and welcome, info and support flash head end -->
+
+</body>
+
+</html>

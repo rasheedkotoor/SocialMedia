@@ -1,0 +1,98 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block content %}
+<section>
+    <div class="gap2 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row merged20" id="page-contents">
+
+                        <!-- left side div start  -->
+                        <div class="col-lg-3">
+                            <aside class="sidebar static left">
+                                <!-- weather widget-->
+                                <!-- birthday widget -->
+                                <!-- who's following -->
+                                <!-- twitter feed-->
+                                <!-- advertisment box -->
+                                <!-- recent activites -->
+                                <!-- Shortcuts -->
+                            </aside>
+                        </div><!-- sidebar -->
+
+                            <!-- central div  start -->
+                            <!-- user login  -->
+
+                            <!-- add post new box -->
+                            <!-- Promote-baner  new box -->
+                            <!-- top stories -->
+                            <!-- suggested friends -->
+                            <!-- advertisment -->
+                        <div class="central-meta postbox">
+                            <div class="new-postbox mt-4">
+                                <div class="attachments">
+
+                                    <span class="create-post">If you are new here. Get your free account</span>
+                                    <div class="rec-events bg-purple col-12 col-sm-6 " style="height:120px">
+                                        <a href="{% url 'student_register' %}" style="display: block; color: #fff" class="btn p-1">
+                                            <i class="ti-gift"></i>
+                                            <h4>Student Registration</h4>
+                                            <img src="{% static 'user/images/clock.png' %}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="rec-events bg-green col-12 col-sm-6 " style="height:120px">
+                                        <a href="{% url 'union_register' %}" style="display: block; color: #fff" class="btn p-1">
+                                            <i class="ti-microphone"></i>
+                                            <h4>Union Registration</h4>
+                                            <img src="{% static 'user/images/clock.png' %}" alt="">
+                                        </a>
+                                    </div>
+
+                                    <span class="create-post">If you have an account</span>
+                                    <div class="rec-events bg-light col-12 col-sm-6 " style="height:70px">
+                                        <a href="{% url 'login' %}" style="display: block; color: #0000ff" class="btn p-1">
+                                            <h4>Login</h4>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div><!-- class="loadMore -->
+
+                                <!-- album post -->
+                                <!-- video post -->
+                                <!-- digital sponsors sponsered -->
+                                <!-- love post -->
+                                <!-- without image -->
+                                <!-- map location post -->
+                                <!-- video post -->
+                            </div>
+                        </div><!-- centerl meta -->
+
+                        <!-- right div start -->
+                        <div class="col-lg-3">
+                            <aside class="sidebar static right">
+                                <!-- how it's work video -->
+                                <!-- page like widget -->
+                                <!-- explore events -->
+                                <!-- widget pitlink Create new post -->
+                                <!-- profile intro widget -->
+                                <!-- recent links -->
+                            </aside>
+                        </div><!-- sidebar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

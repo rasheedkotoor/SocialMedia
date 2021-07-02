@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Union Registration</title>
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+
+    <link rel="stylesheet" href="{% static 'user/css/main.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/weather-icon.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/weather-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/responsive.css' %}">
+
+</head>
+<body>
+	<div class="www-layout">
+        <section>
+        	<div class="gap no-gap signin whitish medium-opacity register">
+                <div class="bg-image" style="background-image:url({% static 'user/images/resources/theme-bg.jpg' %})"></div>
+                <div class="container">
+                	<div class="row">
+                        <div class="col-lg-2">
+                            <div class="big-ad">
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-8">
+                            <div class="reg-from">
+								<span><i class="fa fa-lock"></i> Create Union Account</span>
+								<p>Its quick and Easy</p>
+								<form class="c-form" method="post">
+                                    {% csrf_token %}
+									<div class="row merged10">
+										<div class="col-lg-12 col-md-12 col-sm-12">
+                                            {{ form.username.errors }}
+                                            {{ form.username.label_tag }}
+                                            {{ form.username }}
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+                                            {{ form.first_name.errors }}
+                                            {{ form.first_name.label_tag }}
+                                            {{ form.first_name }}
+<!--											<input class="mb-2"  name="first_name" type="text" placeholder="Union-Short-Name">-->
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+                                            {{ form.phone_number.errors }}
+                                            {{ form.phone_number.label_tag }}
+                                            {{ form.phone_number }}
+<!--											<input class="mb-2" name="phone_number" type="number" placeholder="Contact Number">-->
+										</div>
+										<div class="col-lg-12 col-md-12 col-sm-12">
+                                            {{ form.email.errors }}
+                                            {{ form.email.label_tag }}
+                                            {{ form.email }}
+<!--											<input class="mb-2" name="email" type="email" placeholder="Email ID">-->
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+                                            {{ form.college_short_name.errors }}
+                                            {{ form.college_short_name.label_tag }}
+                                            {{ form.college_short_name }}
+<!--											<input class="mb-2" name="college_short_name" type="text" placeholder="College-Short-Name">-->
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+                                            {{ form.location.errors }}
+                                            {{ form.location.label_tag }}
+                                            {{ form.location }}
+<!--											<input class="mb-2" name="location" type="text" placeholder="Location">-->
+										</div>
+
+										<div class="col-lg-6 col-md-6 col-sm-6">
+<!--											<input class="mb-2" name="password1" type="password" placeholder="Password">-->
+											{{ form.password1.label_tag }}
+											{{ form.password1 }}
+										</div>
+
+										<div class="col-lg-6 col-md-6 col-sm-6">
+											<!-- <input class="mb-2" name="password2" type="password" placeholder="Retype Password">-->
+											{{ form.password2.label_tag }}
+											{{ form.password2 }}
+											{{ form.password2.errors }}
+										</div>
+										<div class="col-lg-7 col-md-6 mt-2">
+											<button type="submit" data-ripple="">Register</button>
+										</div>
+									</div>
+								</form>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    	<script src="{% static 'user/js/main.min.js' %}"></script>
+		<script src="{% static 'user/js/script.js' %}"></script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,106 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col-lg-10">
+
+  <section>
+		<div class="gap2 gray-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row merged20" id="page-contents">
+							<div class="user-profile">
+								<figure>
+									<div class="edit-pp">
+										<label class="fileContainer">
+											<i class="fa fa-camera"></i>
+											<input type="file">
+										</label>
+									</div>
+									<img src="{% static 'user/images/resources/fav-banner.jpg' %}" alt="">
+								</figure>
+
+								<div class="profile-section">
+									<div class="row">
+										<div class="col-lg-2">
+											<div class="profile-author">
+												<a class="profile-author-thumb" href="about.html">
+													<img alt="author" src="{% static 'user/images/resources/fav-dp.jpg' %}">
+													<div class="edit-dp">
+														<label class="fileContainer">
+															<i class="fa fa-camera"></i>
+															<input type="file">
+														</label>
+													</div>
+												</a>
+												<div class="author-content">
+													<a class="h4 author-name" href="#"> {{ user.username| upper }}</a>
+													<div class="country">Ontario, CA</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-10">
+											<ul class="profile-menu">
+<!--												<li>-->
+<!--													<a class="active" href="fav-page.html">Overview</a>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<a class="" href="fav-favers.html">Followers</a>-->
+<!--												</li>-->
+<!--												<li>-->
+<!--													<a class="" href="fav-events.html">Events</a>-->
+<!--												</li>-->
+<!--												-->
+<!--												<li>-->
+<!--													<a href="fav-page-create.html" title="Create New Page"><i class="fa fa-plus-circle"></i></a>-->
+<!--												</li>-->
+											</ul>
+											<ol class="folw-detail">
+												<li><span>Posts</span><ins>{{user.post_set.count}}</ins></li>
+												<li><span>Followers</span><ins>{{user.user_set.count}}</ins></li>
+<!--												<li><span>Members</span><ins>{{ user.friendrequest_set.count }}.</ins></li>-->
+											</ol>
+										</div>
+									</div>
+								</div>
+								<div class="central-meta padding30 mt-4">
+								<h6>Page Admins</h6>
+								<div class="row">
+									{% for admin in admins %}
+										<div class="col-lg-3 col-md-6 col-sm-6">
+										<div class="friend-box">
+											<figure>
+												<img src="{% static 'user/images/resources/frnd-cover1.jpg' %}" alt="">
+											</figure>
+											<div class="frnd-meta">
+												<img src="{% static 'user/images/resources/frnd-figure1.jpg' %}" alt="">
+												<div class="frnd-name">
+													<a href="#" title="">{{ admin.admin|title }}</a>
+												</div>
+													<div class="more-opotnz">
+														<i class="fa fa-ellipsis-h"></i>
+														<ul>
+															<li><a href="#" title="">Remove Admin</a></li>
+														</ul>
+													</div>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+							</div><!-- user profile banner  -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+</div>
+
+
+{% endblock %}

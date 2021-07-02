@@ -1,0 +1,198 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block content %}
+	<section>
+		<div class="gap2 gray-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row merged20" id="page-contents">
+                            {% include 'student/profile_head.html' %}
+							<div class="col-lg-4 col-md-4">
+								<aside class="sidebar">
+								<div class="central-meta stick-widget" style="">
+									<span class="create-post" id="edit_personal_info">Personal Info
+									</span>
+									<div class="personal-head">
+										<span class="f-title"><i class="fa fa-pencil"></i> Full Name:
+											<span class="profile_edit_fn edit_btn " data-user_id="{{user.pk}}">
+												<i class="fa fa-pencil-square-o ml-2"></i>
+											</span>
+											<span class="login-frm mt-0" hidden><input class="" type="text" name="location" placeholder="First Name"></span>
+											<span class="login-frm mt-0" hidden><input class="" type="text" name="location" placeholder="Last Name">
+												<input class="prof_save_btn" type="submit" value="Save">
+											</span>
+										</span>
+										<p>{{ user.first_name }} {{ user.last_name }}</p>
+										{% if me.bio %}
+										<span class="f-title"><i class="fa fa-user"></i> About Me:
+											<span class="profile_edit edit_btn " data-name="bio" data-user_id="{{me.pk}}">
+												<i class="fa fa-pencil-square-o ml-2"></i>
+											</span>
+											<span class="login-frm mt-0" hidden><input class="" type="text" value="{{ me.bio }}" name="bio" placeholder="Abuot Me">
+												<input class="prof_save_btn" type="submit" value="Save">
+											</span>
+										</span>
+										<p>{{ me.bio }}</p>
+
+										{% endif %}
+										<span class="f-title"><i class="fa fa-birthday-cake"></i> Birthday:
+											<span class="profile_edit edit_btn " data-name="birthday" data-user_id="{{me.pk}}">
+												<i class="fa fa-pencil-square-o ml-2"></i>
+											</span>
+											<span class="login-frm mt-0" hidden><input class="" type="date" name="birth_date" placeholder="Birth Date">
+												<input class="prof_save_btn" type="submit" value="Save">
+											</span>
+										</span>
+										<p>{{ me.birth_date|date:"M d" }}</p>
+
+										<span class="f-title"><i class="fa fa-phone"></i> Phone Number:
+											<span class="profile_edit edit_btn " data-name="phone_number" data-user_id="{{user.pk}}">
+												<i class="fa fa-pencil-square-o ml-2"></i>
+											</span>
+											<span class="login-frm mt-0" hidden><input class="" type="number" value="{{ user.phone_number }}" name="phone_number" placeholder="Phone Number">
+												<input class="prof_save_btn" type="submit" value="Save">
+											</span>
+										</span>
+										<p>{{ user.phone_number }}</p>
+
+										<span class="f-title"><i class="fa fa-envelope"></i> Email:</span>
+										<p>{{ user.email }}</p>
+
+										<span class="f-title"><i class="fa fa-globe"></i> Location:
+											<span class="profile_edit edit_btn " data-name="location" data-user_id="{{me.pk}}">
+												<i class="fa fa-pencil-square-o ml-2"></i>
+											</span>
+											<span class="login-frm mt-0" hidden><input class="" type="text" value="{{ me.location }}" name="location" placeholder="Place">
+												<input class="prof_save_btn" type="submit" value="Save">
+											</span>
+										</span>
+										<p>{{ me.location }}</p>
+									</div>
+								</div>
+
+								<div class="central-meta stick-widget" style="">
+									<span class="create-post">General Info
+										<span class="modl-box user-add edit_btn">
+											<i class="fa fa-pencil-square-o"></i> Edit
+										</span>
+									</span>
+									<div class="personal-head">
+										<span class="f-title"><i class="fa fa-university"></i> Collage:</span>
+										<p>{{ me.union.college }}</p>
+										<span class="f-title"><i class="fa fa-list-ol"></i> Admission Number:</span>
+										<p>{{ me.admission_num }}</p>
+										<span class="f-title"><i class="fa fa-users"></i> Students Union:</span>
+										<p>{{ me.union }}</p>
+										<span class="f-title"><i class="fa fa-graduation-cap"></i> Batch Name and Number:</span>
+										<p>{{ me.batch }}: {{ me.batch_num }}</p>
+										<span class="f-title"><i class="fa fa-handshake-o"></i> Joined:</span>
+										<p>{{ me.timestamp }}</p>
+									</div>
+								</div>
+
+								</aside>
+							</div>
+							<div class="col-lg-8 col-md-8">
+								<div class="central-meta">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="gen-metabox">
+												<span class="f-title"><i class="fa fa-puzzle-piece"></i> Hobbies:
+													<span class="profile_edit edit_btn " data-name="hobbies" data-user_id="{{me.pk}}">
+														<i class="fa fa-pencil-square-o ml-2"></i>
+													</span>
+													<span class="login-frm mt-0" hidden><input class="" type="text" value="{{ me.hobbies }}" name="hobbies" placeholder="Your Hobbies">
+														<input class="prof_save_btn" type="submit" value="Save">
+													</span>
+												</span>
+												<p>{{ me.hobbies }}</p>
+
+											</div>
+											<div class="gen-metabox">
+												<span class="f-title"><i class="fa fa-puzzle-piece"></i> Interests:
+													<span class="profile_edit edit_btn " data-name="interests" data-user_id="{{me.pk}}">
+														<i class="fa fa-pencil-square-o ml-2"></i>
+													</span>
+													<span class="login-frm mt-0" hidden><input class="" type="text" name="interests" placeholder="Your Interests">
+														<input class="prof_save_btn" type="submit" value="Save">
+													</span>
+												</span>
+												<p> {% for item in me.interests%} {{ item|title }}, {% endfor %} </p>
+
+											</div>
+<!--											<div class="gen-metabox no-margin">-->
+<!--												<span><i class="fa fa-trophy"></i> Badges</span>-->
+<!--												<ul class="badged">-->
+<!--													<li><img src="{% static 'user/images/badges/badge2.png' %}" alt=""></li>-->
+<!--												</ul>-->
+<!--											</div>-->
+										</div>
+									</div>
+								</div>
+								<div class="central-meta">
+									<span class="create-post">My Union </span>
+									<div class="row">
+										<div class="col-lg-4 col-md-4 col-sm-4">
+											<div class="fav-play">
+												<figure>
+													{% if me.union.user.union.logo %}
+														<img src=" {{ me.union.user.union.logo.url }} " style="width:45px">
+													{% else %}
+														<img src="{% static 'user/images/male.png' %}" style="width:45px">
+													{% endif %}
+												</figure>
+												<span class="tv-play-title">{{ me.union }}</span>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6">
+											<div class="fav-play">
+												<span class="tv-play-title">Name: {{me.union.user.first_name}}</span> <br>
+												<span class="tv-play-title">Email: {{me.union.user.email}}</span> <br>
+												<span class="tv-play-title">Bio: {{me.union.user.union.bio}}</span> <br>
+												<span class="tv-play-title">College: {{me.union.user.union.college_name}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<!-------------------------- edit profile modal -------------------------------->
+<div class="popup-wraper6">
+	<div class="popup login">
+		<span class="popup-closed"><i class="ti-close"></i></span>
+		<div class="popup-meta">
+			<div class="popup-head">
+				<h5><i class="ti-key"></i> General Info </h5>
+			</div>
+				<form class="" method="post">
+					{% csrf_token %}
+					<div class="col-md-12 login-frm">
+						<input type="text" value="{{ me.location }}" name="location" placeholder="Your Place">
+						<input type="number" value="{{ me.admission_num }}" name="admission_num" placeholder="Admission Number">
+						<input type="number" value="{{ me.batch_num }}" name="batch_num" placeholder="Batch Number">
+					</div>
+					<button data-ripple="" type="submit" class="main-btn col-md-12">Save</button>
+				</form>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+	var like_count = "{{ po.like_set.count }}"
+</script>
+
+<script src="{% static 'user/js/my-js.js' %}"></script>
+
+
+
+
+{% endblock %}
