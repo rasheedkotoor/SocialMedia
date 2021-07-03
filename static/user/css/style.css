@@ -19795,8 +19795,8 @@ a.wish-btn {
     width: 0;
 }
 #pp_save_btn_bg {
-    position: relative;
-    top: 347px;
+    position: absolute;
+    top: 20px;
     left: 50px;
     z-index: 133;
 }

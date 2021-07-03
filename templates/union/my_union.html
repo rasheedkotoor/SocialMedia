@@ -13,14 +13,17 @@
 							<div class="user-profile">
 								<figure>
 									{% if union.union.background_img %}
-										<img id="cropped_bg" alt="author"  src=" {{ union.union.background_img.url }} "  >
+										<img id="cropped_bg" class="bg_hover" alt="author"  src=" {{ union.union.background_img.url }} "  >
 									{% else %}
-										<img id="cropped_bg" alt="cropped" src="{% static 'user/images/resources/profile-image.jpg' %}" >
+										<img id="cropped_bg" class="bg_hover" alt="cropped" src="{% static 'user/images/resources/profile-image.jpg' %}" >
 									{% endif %}
 										{% if admin %}
 											<form action="{% url 'union:upload_union_bg' %}?next={{ request.path }}" method="post"  enctype="multipart/form-data">
 												{% csrf_token %}
-												<input id="background_img" class="background_img" name="background_img" type="file" hidden>
+												<label for="background_img_input" id="background_img" class="fileContainer bg_hover bg-white" hidden>
+													<i class="fa fa-camera pt-3" style="width:50px; height:50px;"></i>
+													<input id="background_img_input" class="bg_hover" name="background_img" type="file" hidden>
+												</label>
 												<input id="pp_save_btn_bg" type='submit' class="btn btn-success mt-2" value="save" hidden>
 											</form>
 										{% endif %}
@@ -145,7 +148,7 @@
 													Your browser does not support the video tag.
 												</video>
 											{% else %}
-												<embed src="{{ po.image_url }}" width="500px" height="400px" />
+												<embed src="{{ po.image_url }}" width="90%" height="400px" />
 											{% endif %}
 										</figure>
 										{% endif %}
@@ -315,7 +318,7 @@
 <!----------------------------------------->
 <!-----------------cropping----------------->
 <script>
-    $("#cropped_bg").hover(
+    $(".bg_hover").hover(
     function() {
         $('#background_img').removeAttr('hidden')
     },
@@ -326,7 +329,6 @@
     $("#background_img").change(function() {
         $('#pp_save_btn_bg').removeAttr('hidden')
     });
-
 </script>
 <script>
 var imgSrc;

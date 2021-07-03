@@ -1,5 +1,6 @@
 import base64
 import os.path
+import re
 
 from django.contrib import messages
 from django.core.files.base import ContentFile
@@ -21,6 +22,14 @@ from .forms import CreatePostForm, ProfileUpdateForm1, ProfileUpdateForm2, Profi
 
 
 # Create your views here.
+# yt_link = re.compile(r'(https?://)?(www\.)?((youtu\.be/)|(youtube\.com/watch/?\?v=))([A-Za-z0-9-_]+)', re.I)
+# yt_embed = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{0}" frameborder="0" ' \
+#            'allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> '
+#
+#
+# def convert_ytframe(text):
+#     """ to convert in to iframe """
+#     return yt_link.sub(lambda match: yt_embed.format(match.groups()[5]), text)
 
 
 class UserHomeView(LoginRequiredMixin, View):
@@ -28,7 +37,6 @@ class UserHomeView(LoginRequiredMixin, View):
 
     def get(self, request: WSGIRequest) -> HttpResponse:
         post_form = CreatePostForm()
-
         union = User.objects.filter(is_union=True)
         sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
         rec_friend_requests = FriendRequest.objects.filter(to_user=request.user)
@@ -46,6 +54,8 @@ class UserHomeView(LoginRequiredMixin, View):
         po = ''
         for po in post:
             po.liked = Like.objects.filter(user=lu, post=po) and True or False
+            # text = po.text
+            # po.yt = convert_ytframe(text)  # converting to iframe not used in project
 
         context = {"post_form": post_form, 'student': student, 'union': union,
                    'po': po, 'post': post, 'sent_friend_requests': sent_friend_requests,
@@ -302,4 +312,3 @@ def chat_room(request, pk):
         return render(request, 'student/chat.html', context)
     else:
         return redirect('student:friends')
-

@@ -115,7 +115,7 @@
 
 												{% csrf_token %}
 												<textarea name="text" id="" cols="30" rows="10"></textarea>
-												<input type="file" name="image">
+												<input type="file" name="image" multiple accept="image/*,video/*">
 												<button class="post-btn" type="submit" data-ripple="">Post</button>
 											</form>
 										</div>
@@ -151,6 +151,7 @@
 													<span>published: {{ po.created }}</span>
 												</div>
 												<div class="post-meta">
+													<a href="{% url 'student:post_details' po.pk %}" class="learnmore" data-ripple="">view</a>
 													{% if po.image_url %}
 													<figure style="">
 														{% if po.filetype == 'image' %}
@@ -167,13 +168,7 @@
 													</figure>
 													{% endif %}
 													<div class="description">
-														<a href="{% url 'student:post_details' po.pk %}" class="learnmore" data-ripple="">view</a>
-														<p>{{ po.text }}</p>
-														<ul class="like-dislike">
-	<!--														<li><a class="bg-purple" href="#" title="Save to Pin Post"><i class="fa fa-thumb-tack"></i></a></li>-->
-	<!--														<li><a class="like_button bg-blue" href="#" title="Like Post" data-post_id="{{po.id}}"><i class="ti-thumb-up"></i></a></li>-->
-	<!--														<li><a class="bg-red" href="#" title="dislike Post"><i class="ti-thumb-down"></i></a></li>-->
-														</ul>
+														<p>{{ po.text|urlize }}</p>
 													</div>
 													<div class="we-video-info">
 														<ul>
@@ -225,7 +220,9 @@
 															</div>
 															<div class="post-comt-box">
 																<form>
-																	<textarea id="cmnt-{{po.id}}" placeholder="Post your comment"></textarea>
+																	<input type="text" id="cmnt-{{po.id}}" placeholder="Post your comment"
+																		   style="border: 0; padding: 7px 15px; border: 1px solid #ccc; position: relative; background: transparent;"
+																		   data-post_id="{{po.id}}">
 																	<a class="cmnt_button main-btn2 p-2 m-2 mb-2" type="submit" data-post_id="{{po.id}}">send</a>
 																</form>
 															</div>
@@ -310,7 +307,6 @@
 														<div class="friend-meta">
 															<h4><a href="{% url 'student:details' req.to_user.pk %}" title=""> {{ req.to_user.username }}</a></h4>
 															<a  title="Friend Request" class="friend_req  p-0" type="submit" data-user_id="{{req.to_user.id}}">Cancel</a>
-			<!--													<a class="cmnt_button main-btn2 p-2 m-2 mb-2" type="submit" data-post_id="{{po.id}}">send</a>-->
 														</div>
 													</li>
 												{% endfor %}

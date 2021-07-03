@@ -154,7 +154,9 @@
 										</figure>
 										<div class="newpst-input">
 											<form method="post" enctype="multipart/form-data">
-												{% csrf_token %} {{ post_form|crispy }}
+												{% csrf_token %}
+												<textarea name="text" id="" cols="30" rows="10"></textarea>
+												<input type="file" name="image" multiple accept="image/*,video/*">
 												<button class="post-btn" type="submit" data-ripple="">Post</button>
 											</form>
 										</div>

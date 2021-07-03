@@ -51,12 +51,8 @@
                                         Your browser does not support the audio element.
                                     </audio>
                                 </span>
-                                {% elif n.message_type == 'other' %}
-                                <span class="chat-message-item">
-                                    <embed src="{{ n.vid_img.url }}" width="600px" height="400px" />
-                                </span>
                                 {% else %}
-                                <span class="chat-message-item">{{ n.message }}</span>
+                                <span class="chat-message-item">{{ n.message|urlize }}</span>
                                 {% endif %}
                                 <span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">{{ n.timestamp }}</time></span>
                             </div>
@@ -73,8 +69,24 @@
                             <div class="notification-event">
                                 {% if n.message_type == 'image' %}
                                 <span class="chat-message-item bg-warning"> <img src=" {{ n.message }}" alt="" style="height:300px"></span>
+                                {% elif n.message_type == 'video' %}
+                                <span class="chat-message-item bg-warning">
+                                    <video class="player" width="90%" height="" controls>
+                                        <source src="{{ n.vid_img.url }}" type="video/mp4">
+                                        <source src="{{ n.vid_img.url }}" type="video/ogg">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </span>
+                                {% elif n.message_type == 'audio' %}
+                                <span class="chat-message-item bg-warning">
+                                    <audio controls>
+                                        <source src="{{ n.vid_img.url }}" type="audio/ogg">
+                                        <source src="{{ n.vid_img.ulr }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </span>
                                 {% else %}
-                                <span class="chat-message-item bg-warning">{{ n.message }}</span>
+                                <span class="chat-message-item bg-warning">{{ n.message|urlize }}</span>
                                 {% endif %}
                                 <span class="notification-date"><time class="entry-date updated">{{ n.timestamp }}</time></span>
                             </div>
@@ -102,7 +114,7 @@
                         <div class="col-lg-2" style="float:left;">
                             <label class="fileContainer">
                                 <i class="fa fa-camera p-2" style="font-size:40px"></i>
-                                <input id="message_image" type="file" value="">
+                                <input id="message_image" type="file" value="" multiple accept="image/*,audio/*,video/*">
                             </label>
                         </div>
                     </div>
