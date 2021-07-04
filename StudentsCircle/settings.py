@@ -31,7 +31,6 @@ ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 # ===================================================================
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -158,9 +157,9 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-TWILIO_ACCOUNT_SID = 'AC08d83bdc764a2355a9fbe896d1adf2d9'
-TWILIO_PHONE_NUMBER = '+13473913920'
-TWILIO_AUTH_TOKEN = '15aa0e6753cc1dc2381b3f75d20a01b7'
+TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
+TWILIO_PHONE_NUMBER = config('TWILIO_PHONE_NUMBER')
+TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
 
 CHANNEL_LAYERS = {
     "default": {
