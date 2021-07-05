@@ -183,8 +183,42 @@ TWILIO_PHONE_NUMBER = '+13473913920'
 TWILIO_AUTH_TOKEN = '15aa0e6753cc1dc2381b3f75d20a01b7'
 
 ASGI_APPLICATION = 'StudentsCircle.routing.application'
+
+
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         # "BACKEND": "channels.layers.InMemoryChannelLayer",
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         'CONFIG': {
+#             "hosts": [(
+#                 os.environ.get('REDISHOST', '127.0.0.1'),
+#                 int(os.environ.get('REDISPORT', 6379))
+#             )],
+#         },
+#     },
+# }
+
+# this is working =============
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer",
+#     },
+# }
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
