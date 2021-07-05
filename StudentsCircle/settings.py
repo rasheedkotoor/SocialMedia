@@ -19,6 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+SECRET_KEY = config("SECRET_KEY")
+
 ALLOWED_HOSTS = ["134.209.153.105",]
 
 ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
