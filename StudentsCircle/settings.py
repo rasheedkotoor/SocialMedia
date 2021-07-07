@@ -23,7 +23,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 SECRET_KEY = config("SECRET_KEY")
 
-ALLOWED_HOSTS = ["167.71.235.118",]
+ALLOWED_HOSTS = ["128.199.22.41",]
 
 ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
 
@@ -204,4 +204,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # DEFAULT_FROM_EMAIL = 'CodingWithMitch Team <noreply@codingwithmitch.com>'
 
 
-BASE_URL = "http://167.71.235.118"
+BASE_URL = "http://128.199.22.41"
