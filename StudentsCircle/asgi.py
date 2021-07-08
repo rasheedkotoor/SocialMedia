@@ -1,29 +1,14 @@
 """
-ASGI config for StudentsCircle project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
+ASGI entrypoint. Configures Django and then runs the application
+defined in the ASGI_APPLICATION setting.
 """
 
 import os
-from django.conf.urls import url
-from django.core.asgi import get_asgi_application
+import django
+from decouple import config
+from channels.routing import get_default_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'StudentsCircle.settings')
-django_asgi_app = get_asgi_application()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", f'{config("PROJECT_NAME")}.settings')
+django.setup()
+application = get_default_application()
 
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-
-from student.consumers import ChatRoomConsumer
-
-application = ProtocolTypeRouter({
-    "http": django_asgi_app,
-    "websocket": AuthMiddlewareStack(
-        URLRouter([
-            url(r"^chat/$", ChatRoomConsumer.as_asgi()),
-        ])
-    ),
-})
